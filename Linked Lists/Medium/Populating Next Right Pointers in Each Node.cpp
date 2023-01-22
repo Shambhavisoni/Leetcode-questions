@@ -15,7 +15,7 @@ public:
         : val(_val), left(_left), right(_right), next(_next) {}
 };
 */
-
+//Approach1: BFS
 class Solution {
 public:
     Node* connect(Node* root) {
@@ -53,6 +53,28 @@ public:
             }
         }
         r->next=NULL;
+        return root;
+    }
+};
+
+//Aprroach2: iterative
+
+class Solution {
+public:
+    Node* connect(Node* root) {
+        Node* r=root;
+        while(r!=NULL && r->left!=NULL){
+            Node* a=r;
+            while(true){
+                a->left->next=a->right;
+                if(a->next==NULL){
+                    break;
+                }
+                a->right->next=a->next->left;
+                a=a->next;
+            }
+            r=r->left;
+        }
         return root;
     }
 };
