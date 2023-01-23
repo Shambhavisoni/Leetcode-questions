@@ -51,8 +51,6 @@ public:
             }
             temp=temp->next;
             curr=curr->next;
-            // i++;
-            // it++;
         }
         return head2->next;
     }
