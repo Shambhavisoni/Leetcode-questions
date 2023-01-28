@@ -11,12 +11,32 @@
  */
 class Solution {
 public:
-    int maxDepth(TreeNode* root) {
-        if(root==NULL){
-            return 0;
+    bool helper(TreeNode* r1,TreeNode* r2){
+        if(r1==NULL && r2==NULL){
+            return true;
         }
-        int d1=maxDepth(root->left);
-        int d2=maxDepth(root->right);
-        return max(d1,d2)+1;
+        if(r1==NULL && r2!=NULL){
+            return false;
+        }
+        if(r1!=NULL && r2==NULL){
+            return false;
+        }
+        if(r1->val != r2->val){
+            return false;
+        }
+        bool a=helper(r1->left,r2->right);
+        bool b=helper(r1->right,r2->left);
+        if(a && b){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    bool isSymmetric(TreeNode* root) {
+        if(root==NULL){
+            return true;
+        }
+        return helper(root->left,root->right);
     }
 };
